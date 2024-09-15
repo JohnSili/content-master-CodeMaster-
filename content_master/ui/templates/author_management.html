@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}ContentMaster - Author Management{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Author Management</h2>
+<div class="row">
+    <div class="col-md-6">
+        <h3>Create/Edit Author</h3>
+        <form id="author-form">
+            <div class="mb-3">
+                <label for="author-name" class="form-label">Author Name</label>
+                <input type="text" class="form-control" id="author-name" placeholder="Enter author name" required>
+            </div>
+            <div class="mb-3">
+                <label for="author-description" class="form-label">Author Description</label>
+                <textarea class="form-control" id="author-description" placeholder="Enter author description" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="author-specialty" class="form-label">Specialty</label>
+                <input type="text" class="form-control" id="author-specialty" placeholder="Enter specialty" required>
+            </div>
+            <div class="mb-3">
+                <label for="author-keywords" class="form-label">Keywords</label>
+                <div class="tag-input" id="keywords-container">
+                    <input type="text" class="form-control" id="author-keywords" placeholder="Add keywords">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="author-phrases" class="form-label">Phrases</label>
+                <div class="tag-input" id="phrases-container">
+                    <input type="text" class="form-control" id="author-phrases" placeholder="Add phrases">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="author-text-tone" class="form-label">Text Tone</label>
+                <select class="form-select" id="author-text-tone" required>
+                    <option value="">Select Text Tone</option>
+                    <option value="formal">Formal</option>
+                    <option value="informal">Informal</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Author</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <h3>Author List</h3>
+        <button id="load-authors" class="btn btn-secondary mb-3">Load Authors</button>
+        <ul id="authors" class="list-group"></ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', path='/author_management.js') }}"></script>
+{% endblock %}

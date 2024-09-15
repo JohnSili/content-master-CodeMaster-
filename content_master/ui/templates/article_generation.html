@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}ContentMaster - Article Generation{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Article Generation</h2>
+<div class="row">
+    <div class="col-md-6">
+        <form id="article-form">
+            <div class="mb-3">
+                <label for="article-topic" class="form-label">Article Topic</label>
+                <input type="text" class="form-control" id="article-topic" placeholder="Enter article topic" required>
+            </div>
+            <div class="mb-3">
+                <label for="article-length" class="form-label">Article Length (words)</label>
+                <input type="number" class="form-control" id="article-length" placeholder="Enter article length" required>
+            </div>
+            <div class="mb-3">
+                <label for="article-style" class="form-label">Article Style</label>
+                <select class="form-select" id="article-style" required>
+                    <option value="">Select Style</option>
+                    <option value="formal">Formal</option>
+                    <option value="informal">Informal</option>
+                    <option value="academic">Academic</option>
+                    <option value="creative">Creative</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="article-model" class="form-label">AI Model</label>
+                <select class="form-select" id="article-model" required>
+                    <!-- Options will be populated dynamically -->
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="article-author" class="form-label">Author</label>
+                <select class="form-select" id="article-author" required>
+                    <option value="">Select Author</option>
+                    <!-- Author options will be populated dynamically -->
+                </select>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Generate Article</button>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <h3>Generated Article</h3>
+        <div id="generated-article" class="border p-3 mt-3">
+            <!-- Generated article will be displayed here -->
+        </div>
+        <div id="article-actions" class="mt-3" style="display: none;">
+            <button id="edit-article" class="btn btn-primary">Edit</button>
+            <button id="delete-article" class="btn btn-danger">Delete</button>
+            <button id="save-article" class="btn btn-success">Save to Database</button>
+        </div>
+        <div id="edit-actions" class="mt-3" style="display: none;">
+            <button id="save-changes" class="btn btn-success">Save Changes</button>
+            <button id="discard-changes" class="btn btn-secondary">Discard Changes</button>
+        </div>
+    </div>
+    <div id="article-view" style="display: none;">
+        <h3 id="article-title"></h3>
+        <p><strong>Author:</strong> <span id="article-author"></span></p>
+        <p><strong>Style:</strong> <span id="article-style"></span></p>
+        <div id="article-content"></div>
+        <button id="edit-button">Edit</button>
+        <button id="save-button" style="display: none;">Save Changes</button>
+        <button id="delete-button">Delete</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', path='/article_generation.js') }}"></script>
+{% endblock %}
