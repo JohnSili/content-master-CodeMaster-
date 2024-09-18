@@ -1,8 +1,9 @@
-content_master/
+content_master//
 │
-├── app/
-│   ├── __init__.py
-│   ├── main.py             # Основной файл приложения
+├── app//
+
+│   ├── __init__.py//
+│   ├── main.py//             # Основной файл приложения
 │   ├── config.py           # Конфигурация приложения
 │   │
 │   ├── models/             # Модели данных
