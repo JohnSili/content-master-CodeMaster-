@@ -29,7 +29,7 @@ content_master//
 │       ├── __init__.py
 │       └── text_processing.py
 │
-├── ui/                     # Пользовательский интерфейс (если отдельно от бэкенда)
+├── ui/                     # Пользовательский интерфейс
 │   ├── index.html
 │   ├── styles.css
 │   └── script.js
