@@ -12,12 +12,18 @@ from typing import List, Optional
 from enum import Enum
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import selectinload
+from app.services.text_analysis import analyze_text
 
 router = APIRouter()
 
 class TextTone(str, Enum):
     formal = "formal"
     informal = "informal"
+
+class ArticleAnalytics(BaseModel):
+    statistics: dict
+    keywords: List[tuple]
+    word_cloud: str
 
 class AuthorCreate(BaseModel):
     name: str
@@ -255,4 +261,24 @@ async def delete_article(article_id: int, db: AsyncSession = Depends(get_db)):
         return None
     except Exception as e:
         await db.rollback()
+        raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
+
+
+@router.get("/articles/{article_id}/analytics", response_model=ArticleAnalytics)
+async def get_article_analytics(article_id: int, db: AsyncSession = Depends(get_db)):
+    try:
+        result = await db.execute(select(ArticleModel).filter(ArticleModel.id == article_id))
+        article = result.scalar_one_or_none()
+        if article is None:
+            raise HTTPException(status_code=404, detail="Article not found")
+        
+        # Используйте функцию analyze_text для получения аналитики
+        analytics = analyze_text(article.content)
+        
+        return ArticleAnalytics(
+            statistics=analytics['statistics'],
+            keywords=analytics['keywords'],
+            word_cloud=analytics['word_cloud']
+        )
+    except Exception as e:
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")

@@ -5,8 +5,10 @@ from openai import OpenAI
 class TextGenerator:
     def __init__(self):
         self.client = OpenAI(
-            base_url="https://openrouter.ai/api/v1",
-            api_key='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'
+            # base_url="https://openrouter.ai/api/v1",
+            # api_key='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'
+            api_key="glhf_ee6fa9ada3293f788dfd336a31971a84",
+            base_url="https://glhf.chat/api/openai/v1"
         )
 
     async def generate_article(self, topic: str, length: int, style: str, author_profile: Optional[Dict] = None, model: str = "reflection_llama_3.1_70b") -> str:
@@ -47,16 +49,18 @@ class TextGenerator:
 
     def get_available_models(self):
         return [
-            'mattshumer/reflection-70b:free',
-            'nousresearch/hermes-3-llama-3.1-405b',
-            'sao10k/l3-euryale-70b',
-            'google/gemini-flash-8b-1.5-exp',
-            'google/gemini-flash-1.5-exp',
-            'nousresearch/hermes-3-llama-3.1-405b:extended',
-            'qwen/qwen-2-7b-instruct:free',
-            'microsoft/phi-3-mini-128k-instruct:free',
-            'microsoft/phi-3-medium-128k-instruct:free',
-            'gryphe/mythomist-7b:free'
+            # "hf:deepseek-ai/deepseek-llm-67b-chat",
+            # "hf:google/gemma-2-27b-it",
+            # "hf:google/gemma-2-9b-it",
+            # "hf:google/gemma-2b-it",
+            "hf:meta-llama/Meta-Llama-3.1-405B-Instruct",
+            "hf:meta-llama/Meta-Llama-3-8B-Instruct",
+            "hf:meta-llama/Meta-Llama-3.1-70B-Instruct",
+            "hf:meta-llama/Meta-Llama-3.1-8B-Instruct",
+            "hf:mistralai/Mistral-7B-Instruct-v0.3",
+            # "hf:Qwen/Qwen1.5-110B-Chat",
+            # "hf:Qwen/Qwen1.5-14B-Chat",
+            # "hf:Qwen/Qwen1.5-72B-Chat"
         ]
 
 text_generator = TextGenerator()

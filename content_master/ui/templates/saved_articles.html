@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <h2 class="mb-4">Saved Articles</h2>
             <div class="row mb-3">
                 <div class="col-md-6">
@@ -23,7 +23,7 @@
                 <!-- Saved articles will be displayed here -->
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div id="article-view" class="sticky-top" style="display: none;">
                 <h3 id="article-title"></h3>
                 <p><strong>Author:</strong> <span id="article-author"></span></p>
@@ -36,8 +36,55 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <div id="article-analytics" class="sticky-top" style="display: none;">
+                <h3>Article Analytics</h3>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Text Statistics</h5>
+                        <p><strong>Character Count:</strong> <span id="char-count"></span></p>
+                        <p><strong>Word Count:</strong> <span id="word-count"></span></p>
+                        <p><strong>Sentence Count:</strong> <span id="sentence-count"></span></p>
+                        <p><strong>Average Word Length:</strong> <span id="avg-word-length"></span></p>
+                        <p><strong>Average Sentence Length:</strong> <span id="avg-sentence-length"></span></p>
+                        <p><strong>Lexical Diversity:</strong> <span id="lexical-diversity"></span></p>
+                        <p><strong>Readability Score:</strong> <span id="readability-score"></span></p>
+                        <p><strong>Sentiment Score:</strong> <span id="sentiment-score"></span></p>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Key Words</h5>
+                        <ul id="key-words-list" class="list-group list-group-flush">
+                            <!-- Key words will be displayed here -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Word Cloud</h5>
+                        <img id="word-cloud" class="img-fluid" alt="Word Cloud" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#wordCloudModal">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<div class="modal fade" id="wordCloudModal" tabindex="-1" aria-labelledby="wordCloudModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="wordCloudModalLabel">Word Cloud</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img id="modal-word-cloud" class="img-fluid" alt="Word Cloud">
+        </div>
+      </div>
+    </div>
+  </div>
+
 {% endblock %}
 
 {% block extra_scripts %}

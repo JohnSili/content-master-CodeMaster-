@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const editButton = document.getElementById('edit-button');
     const saveButton = document.getElementById('save-button');
     const deleteButton = document.getElementById('delete-button');
+    const articleAnalytics = document.getElementById('article-analytics');
 
     let articles = [];
     let currentArticle = null;
@@ -74,10 +75,40 @@ document.addEventListener('DOMContentLoaded', () => {
             articleContent.contentEditable = false;
             editButton.style.display = 'inline-block';
             saveButton.style.display = 'none';
+
+            // Запрос и отображение аналитики
+            const analyticsResponse = await fetch(`/api/articles/${id}/analytics`);
+            if (!analyticsResponse.ok) {
+                throw new Error(`HTTP error! status: ${analyticsResponse.status}`);
+            }
+            const analytics = await analyticsResponse.json();
+            displayAnalytics(analytics);
         } catch (error) {
             console.error('Error viewing article:', error);
             alert('Error viewing article. Please try again.');
         }
+    }
+
+    function displayAnalytics(analytics) {
+        document.getElementById('char-count').textContent = analytics.statistics.char_count;
+        document.getElementById('word-count').textContent = analytics.statistics.word_count;
+        document.getElementById('sentence-count').textContent = analytics.statistics.sentence_count;
+        document.getElementById('avg-word-length').textContent = analytics.statistics.average_word_length.toFixed(2);
+        document.getElementById('avg-sentence-length').textContent = analytics.statistics.average_sentence_length.toFixed(2);
+        document.getElementById('lexical-diversity').textContent = analytics.statistics.lexical_diversity.toFixed(2);
+        document.getElementById('readability-score').textContent = analytics.statistics.readability_score.toFixed(2);
+        document.getElementById('sentiment-score').textContent = analytics.statistics.sentiment_score.toFixed(2);
+    
+        const keyWordsList = document.getElementById('key-words-list');
+        keyWordsList.innerHTML = analytics.keywords.map(([word, score]) => `
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                ${word}
+                <span class="badge bg-primary rounded-pill">${score.toFixed(2)}</span>
+            </li>
+        `).join('');
+    
+        document.getElementById('word-cloud').src = `data:image/png;base64,${analytics.word_cloud}`;
+        articleAnalytics.style.display = 'block';
     }
 
     editButton.addEventListener('click', () => {
@@ -104,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
             editButton.style.display = 'inline-block';
             saveButton.style.display = 'none';
             loadSavedArticles();
+            viewArticle(currentArticle.id); // Обновляем аналитику после сохранения изменений
         } catch (error) {
             console.error('Error:', error);
             alert('Error updating article: ' + error.message);
@@ -121,6 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 alert('Article deleted successfully');
                 articleView.style.display = 'none';
+                articleAnalytics.style.display = 'none';
                 loadSavedArticles();
             } catch (error) {
                 console.error('Error deleting article:', error);

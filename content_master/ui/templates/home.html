@@ -3,10 +3,131 @@
 {% block title %}ContentMaster - Home{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-8 offset-md-2">
-        <h2 class="mb-4">Welcome to ContentMaster</h2>
-        <p class="lead">Select an option from the menu to get started.</p>
+<div class="container mt-5">
+    <div class="row mb-3">
+        <div class="col-md-8 offset-md-2 text-right">
+            <button id="langToggle" class="btn btn-primary">Switch to Russian</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="mb-4 lang-en text-center">Welcome to ContentMaster</h2>
+            <h2 class="mb-4 lang-ru text-center" style="display: none;">Добро пожаловать в ContentMaster</h2>
+
+            <p class="lead lang-en">Your all-in-one solution for content creation and analysis.</p>
+            <p class="lead lang-ru" style="display: none;">Ваше комплексное решение для создания и анализа контента.</p>
+
+            <h3 class="mt-5 mb-3 lang-en">What We Offer</h3>
+            <h3 class="mt-5 mb-3 lang-ru" style="display: none;">Что мы предлагаем</h3>
+
+            <ul class="list-group lang-en">
+                <li class="list-group-item"><i class="bi bi-robot"></i> AI-powered article generation</li>
+                <li class="list-group-item"><i class="bi bi-person-badge"></i> Customizable author profiles</li>
+                <li class="list-group-item"><i class="bi bi-bar-chart-line"></i> In-depth text analysis</li>
+                <li class="list-group-item"><i class="bi bi-file-text"></i> Content management system</li>
+            </ul>
+            <ul class="list-group lang-ru" style="display: none;">
+                <li class="list-group-item"><i class="bi bi-robot"></i> Генерация статей с помощью ИИ</li>
+                <li class="list-group-item"><i class="bi bi-person-badge"></i> Настраиваемые профили авторов</li>
+                <li class="list-group-item"><i class="bi bi-bar-chart-line"></i> Глубокий анализ текста</li>
+                <li class="list-group-item"><i class="bi bi-file-text"></i> Система управления контентом</li>
+            </ul>
+
+            <h3 class="mt-5 mb-3 lang-en">Understanding Our Text Analysis Metrics</h3>
+            <h3 class="mt-5 mb-3 lang-ru" style="display: none;">Понимание наших метрик анализа текста</h3>
+
+            <dl class="row lang-en">
+                <dt class="col-sm-3">Character Count</dt>
+                <dd class="col-sm-9">The total number of characters in the text, including spaces.</dd>
+
+                <dt class="col-sm-3">Word Count</dt>
+                <dd class="col-sm-9">The total number of words in the text.</dd>
+
+                <dt class="col-sm-3">Sentence Count</dt>
+                <dd class="col-sm-9">The total number of sentences in the text.</dd>
+
+                <dt class="col-sm-3">Average Word Length</dt>
+                <dd class="col-sm-9">The average number of characters per word. Higher values may indicate more complex vocabulary.</dd>
+
+                <dt class="col-sm-3">Average Sentence Length</dt>
+                <dd class="col-sm-9">The average number of words per sentence. Longer sentences can be more challenging to read.</dd>
+
+                <dt class="col-sm-3">Lexical Diversity</dt>
+                <dd class="col-sm-9">The ratio of unique words to total words. Higher values indicate more diverse vocabulary.</dd>
+
+                <dt class="col-sm-3">Readability Score</dt>
+                <dd class="col-sm-9">Based on the Flesch-Kincaid readability test. Lower scores indicate easier-to-read text.</dd>
+
+                <dt class="col-sm-3">Sentiment Score</dt>
+                <dd class="col-sm-9">A measure of the overall emotional tone of the text. Positive values indicate positive sentiment, negative values indicate negative sentiment.</dd>
+
+                <dt class="col-sm-3">Keywords</dt>
+                <dd class="col-sm-9">The most significant words in the text, based on their frequency and relevance.</dd>
+
+                <dt class="col-sm-3">Word Cloud</dt>
+                <dd class="col-sm-9">A visual representation of word frequency in the text, with larger words appearing more often.</dd>
+            </dl>
+
+            <dl class="row lang-ru" style="display: none;">
+                <dt class="col-sm-3">Количество символов</dt>
+                <dd class="col-sm-9">Общее количество символов в тексте, включая пробелы.</dd>
+
+                <dt class="col-sm-3">Количество слов</dt>
+                <dd class="col-sm-9">Общее количество слов в тексте.</dd>
+
+                <dt class="col-sm-3">Количество предложений</dt>
+                <dd class="col-sm-9">Общее количество предложений в тексте.</dd>
+
+                <dt class="col-sm-3">Средняя длина слова</dt>
+                <dd class="col-sm-9">Среднее количество символов на слово. Более высокие значения могут указывать на более сложный словарный запас.</dd>
+
+                <dt class="col-sm-3">Средняя длина предложения</dt>
+                <dd class="col-sm-9">Среднее количество слов в предложении. Более длинные предложения могут быть сложнее для чтения.</dd>
+
+                <dt class="col-sm-3">Лексическое разнообразие</dt>
+                <dd class="col-sm-9">Отношение уникальных слов к общему количеству слов. Более высокие значения указывают на более разнообразный словарный запас.</dd>
+
+                <dt class="col-sm-3">Оценка читабельности</dt>
+                <dd class="col-sm-9">Основана на тесте читабельности Флеша-Кинкейда. Более низкие оценки указывают на более легкий для чтения текст.</dd>
+
+                <dt class="col-sm-3">Оценка тональности</dt>
+                <dd class="col-sm-9">Мера общего эмоционального тона текста. Положительные значения указывают на положительный настрой, отрицательные - на отрицательный.</dd>
+
+                <dt class="col-sm-3">Ключевые слова</dt>
+                <dd class="col-sm-9">Наиболее значимые слова в тексте, основанные на их частоте и релевантности.</dd>
+
+                <dt class="col-sm-3">Облако слов</dt>
+                <dd class="col-sm-9">Визуальное представление частоты слов в тексте, где более крупные слова встречаются чаще.</dd>
+            </dl>
+
+            <p class="mt-5 lang-en">Select an option from the menu to get started with content creation and analysis.</p>
+            <p class="mt-5 lang-ru" style="display: none;">Выберите опцию из меню, чтобы начать создание и анализ контента.</p>
+        </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const langToggle = document.getElementById('langToggle');
+        const enElements = document.querySelectorAll('.lang-en');
+        const ruElements = document.querySelectorAll('.lang-ru');
+
+        let isEnglish = true;
+
+        langToggle.addEventListener('click', function() {
+            if (isEnglish) {
+                enElements.forEach(el => el.style.display = 'none');
+                ruElements.forEach(el => el.style.display = 'block');
+                langToggle.textContent = 'Switch to English';
+            } else {
+                enElements.forEach(el => el.style.display = 'block');
+                ruElements.forEach(el => el.style.display = 'none');
+                langToggle.textContent = 'Переключить на русский';
+            }
+            isEnglish = !isEnglish;
+        });
+    });
+</script>
 {% endblock %}
